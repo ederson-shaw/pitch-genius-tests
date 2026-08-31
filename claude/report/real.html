@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PitchGenius architectures &mdash; chooser</title>
+<style>
+:root{
+  --paper:#fbfbfa; --paper-2:#f2f0ea; --paper-3:#e9e5db;
+  --ink:#1c1a17; --ink-2:#5c5750; --ink-3:#8a847a;
+  --line:#e0dcd2; --line-2:#cfc9ba;
+  --accent:#b3541e; --accent-2:#8f3f13; --accent-tint:#f4e3d5;
+  --good:#3f7d52; --bad:#b3261e;
+  --radius:10px;
+  --serif: ui-serif, Georgia, "Iowan Old Style", serif;
+  --sans: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, "JetBrains Mono", monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#18160f; --paper-2:#211e17; --paper-3:#2a261d;
+    --ink:#ece7db; --ink-2:#b3ab9b; --ink-3:#847c6c;
+    --line:#332f24; --line-2:#433e2f;
+    --accent:#e08a4c; --accent-2:#f2a86b; --accent-tint:#3a2c1c;
+    --good:#6fbf86; --bad:#e5766a;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#18160f; --paper-2:#211e17; --paper-3:#2a261d;
+  --ink:#ece7db; --ink-2:#b3ab9b; --ink-3:#847c6c;
+  --line:#332f24; --line-2:#433e2f;
+  --accent:#e08a4c; --accent-2:#f2a86b; --accent-tint:#3a2c1c;
+  --good:#6fbf86; --bad:#e5766a;
+}
+:root[data-theme="light"]{
+  --paper:#fbfbfa; --paper-2:#f2f0ea; --paper-3:#e9e5db;
+  --ink:#1c1a17; --ink-2:#5c5750; --ink-3:#8a847a;
+  --line:#e0dcd2; --line-2:#cfc9ba;
+  --accent:#b3541e; --accent-2:#8f3f13; --accent-tint:#f4e3d5;
+  --good:#3f7d52; --bad:#b3261e;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+     font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+main{max-width:1180px;margin:0 auto;padding:36px 22px 120px}
+h1{font-family:var(--serif);font-size:2.1rem;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+h2{font-family:var(--serif);font-size:1.4rem;margin:0 0 12px}
+.lede{color:var(--ink-2);font-family:var(--serif);font-size:1.1rem;margin:0 0 6px}
+.meta-line{color:var(--ink-3);font-size:12.5px;margin:0 0 20px}
+.fixture-banner{background:var(--accent-tint);color:var(--accent-2);border:1px solid var(--accent);
+  border-radius:8px;padding:9px 14px;font-size:12.5px;font-weight:600;margin:0 0 22px}
+section{margin:34px 0}
+hr.card-rule{border:none;border-top:1px solid var(--line);margin:10px 0}
+
+.roster-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.arch-card{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 18px;font-size:13.5px}
+.arch-card.pinned{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.arch-card.greyed{opacity:.55;filter:grayscale(55%)}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.card-title{font-family:var(--serif);font-size:1.15rem;display:flex;align-items:center;gap:8px}
+.pin-star{color:var(--accent)}
+.card-iter{color:var(--ink-3);font-size:11.5px;font-family:var(--mono);white-space:nowrap}
+.status{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;
+  padding:1px 7px;border-radius:20px;border:1px solid var(--line-2);color:var(--ink-2)}
+.status-frozen{color:var(--good);border-color:var(--good)}
+.status-live{color:var(--accent-2);border-color:var(--accent)}
+.status-dropped{color:var(--bad);border-color:var(--bad)}
+.card-quote{margin:10px 0 8px;padding:0 0 0 12px;border-left:3px solid var(--accent);
+  font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--ink-2)}
+.card-quote cite{display:block;font-style:normal;color:var(--ink-3);font-size:11px;margin-top:3px}
+.card-logic{margin:0;color:var(--ink)}
+.card-numbers{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:12.5px}
+.card-numbers-2{margin-top:6px}
+.floor-line{font-weight:600}
+.floor-pass{color:var(--good)}
+.floor-fail{color:var(--bad)}
+.latency{color:var(--ink-3);font-family:var(--mono);font-size:11.5px}
+.lesson{margin-top:6px;font-weight:600;color:var(--bad)}
+.own-objective{margin-top:10px;padding-top:8px;border-top:1px dashed var(--line);font-size:12px;color:var(--ink-2)}
+
+.favourites{background:var(--accent-tint);border:1px solid var(--accent);border-radius:var(--radius);
+  padding:16px 18px}
+.favourites h2{margin-bottom:8px}
+.pin-item{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;
+  font-size:13px;padding:4px 0}
+.pin-badge{font-family:var(--mono);font-size:10px;color:var(--accent-2);font-weight:700}
+.pin-name{font-weight:700}
+.pin-displaced{color:var(--ink-3);font-size:11.5px}
+
+.compare-note{color:var(--ink-2);font-size:13px;max-width:70ch}
+.compare-controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:10px 0;font-size:12.5px}
+.silent-toggle{display:flex;align-items:center;gap:6px}
+.quiet-summary{color:var(--ink-3)}
+.compare-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius)}
+table.compare-table{border-collapse:collapse;width:100%;font-size:12.5px;min-width:760px}
+.compare-table thead th{position:sticky;top:0;background:var(--paper-2);border-bottom:2px solid var(--line);
+  padding:8px 10px;text-align:left;font-size:11.5px;color:var(--ink-2)}
+.arch-toggle-label{display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap}
+.line-head{min-width:220px}
+.compare-table td{border-bottom:1px solid var(--line);padding:7px 10px;vertical-align:top}
+.line-cell{max-width:280px}
+.line-cell .who{font-family:var(--mono);font-size:10.5px;color:var(--accent-2);text-transform:uppercase;
+  letter-spacing:.05em;margin-right:6px}
+.line-cell .quote{font-family:var(--serif)}
+.line-cell .gloss{display:block;color:var(--ink-3);font-size:11px;margin-top:2px}
+.cell{min-width:150px}
+.cell .dot{color:var(--ink-3);font-size:16px}
+.cell.hold.miss .miss-label{color:var(--bad);font-size:10.5px;margin-left:6px}
+.cell.fire{border-radius:8px}
+.cell.fire.correct{background:color-mix(in srgb, var(--good) 12%, transparent)}
+.cell.fire.false-fire{background:color-mix(in srgb, var(--bad) 14%, transparent)}
+.cell.fire.fabricated{background:color-mix(in srgb, var(--bad) 22%, transparent)}
+.fire-level{font-family:var(--mono);font-size:11px;font-weight:700}
+.fire-mark{font-weight:700}
+.cell.fire.correct .fire-mark{color:var(--good)}
+.cell.fire.false-fire .fire-mark,.cell.fire.fabricated .fire-mark{color:var(--bad)}
+.fire-note{font-size:10.5px;color:var(--bad);margin-left:4px}
+.fire-signal{color:var(--ink-2)}
+tr.compare-row.quiet-row{display:none}
+
+.foot{margin-top:48px;color:var(--ink-3);font-size:11.5px;border-top:1px solid var(--line);padding-top:14px}
+@media print{
+  body{background:#fff;color:#111}
+  .compare-controls,.silent-toggle{display:none}
+  tr.compare-row.quiet-row{display:table-row}
+}
+</style>
+</head>
+<body>
+<main>
+<h1>Coach architectures &mdash; pick one</h1>
+<p class="lede">Every architecture we have built, the complaint each one attacks, and what it actually did
+  on the Dressler call. 8 cards, 0 dropped, one pinned.</p>
+<p class="meta-line">standard gold-v3 &middot; call dressler (David &times; Russell, discovery) &middot;
+  silent floor 0.818 moment mode / 0.926 buyer-line mode / 30 of 100 rubric points (an all-HOLD coach)</p>
+
+
+<section class="roster">
+<h2>Roster</h2>
+<div class="roster-grid">
+
+<div class="arch-card greyed" id="card-A-nothink" data-arch="A-nothink">
+  <div class="card-head">
+    <div class="card-title">A-nothink &middot; SIGNAL DICTIONARY, no thinking
+      <span class="status status-done">done</span></div>
+    <div class="card-iter">iter 1 &middot; 1 runs</div>
+  </div>
+  <blockquote class="card-quote">&ldquo;It&#x27;s no thinking. It&#x27;s still like, you know, binary, zeros and ones&rdquo;
+    <cite>&mdash; Russell, 85-min meeting</cite></blockquote>
+  <p class="card-logic">Card A with thinking off. The control for what the thinking budget buys and costs.</p>
+  <hr class="card-rule">
+  <div class="card-numbers">
+    <span>caught 2 of 2 required</span>
+    <span>false fires 5</span>
+    <span>contract 10 of 10</span>
+  </div>
+  <div class="card-numbers card-numbers-2">
+    <div class="floor-line floor-fail">a mute coach scores the same</div>
+    <span class="latency">model call only &middot; p95 5.0s</span>
+  </div>
+  
+</div>
+<div class="arch-card greyed" id="card-A-signal-dictionary" data-arch="A-signal-dictionary">
+  <div class="card-head">
+    <div class="card-title">A-signal-dictionary &middot; SIGNAL DICTIONARY
+      <span class="status status-done">done</span></div>
+    <div class="card-iter">iter 3 &middot; 3 runs</div>
+  </div>
+  <blockquote class="card-quote">&ldquo;it has no idea what a buying signal is it is completely making it up&rdquo;
+    <cite>&mdash; Russell, 85-min meeting</cite></blockquote>
+  <p class="card-logic">Names the trigger and quotes the buyer before it is allowed to decide. Attacks: it has no idea what a buying signal is.</p>
+  <hr class="card-rule">
+  <div class="card-numbers">
+    <span>caught 2 of 2 required</span>
+    <span>false fires 4</span>
+    <span>contract 2 of 9</span>
+  </div>
+  <div class="card-numbers card-numbers-2">
+    <div class="floor-line floor-fail">a mute coach scores the same</div>
+    <span class="latency">model call only &middot; p95 19.4s</span>
+  </div>
+  
+</div>
+<div class="arch-card greyed" id="card-A-signal-dictionary-nothink" data-arch="A-signal-dictionary-nothink">
+  <div class="card-head">
+    <div class="card-title">A-signal-dictionary-nothink &middot; SIGNAL DICTIONARY, dead run
+      <span class="status status-no_decision_points">no_decision_points</span></div>
+    <div class="card-iter">iter 1 &middot; 1 runs</div>
+  </div>
+  <blockquote class="card-quote">&ldquo;there&#x27;s something wrong with the transcript&rdquo;
+    <cite>&mdash; Russell, 85-min meeting</cite></blockquote>
+  <p class="card-logic">Card A, thinking off, run against a player that yielded no decision points. Kept as a failed run, not deleted.</p>
+  <hr class="card-rule">
+  <div class="card-numbers">
+    <span>no required fires on this call</span>
+    <span>false fires 0</span>
+    <span>contract 0 of 0</span>
+  </div>
+  <div class="card-numbers card-numbers-2">
+    <div class="floor-line floor-fail">a mute coach scores the same</div>
+    <span class="latency">model call only &middot; p95 0.0s</span>
+  </div>
+  
+</div>
+<div class="arch-card greyed" id="card-A-thinking" data-arch="A-thinking">
+  <div class="card-head">
+    <div class="card-title">A-thinking &middot; SIGNAL DICTIONARY, full thinking
+      <span class="status status-done">done</span></div>
+    <div class="card-iter">iter 1 &middot; 1 runs</div>
+  </div>
+  <blockquote class="card-quote">&ldquo;It&#x27;s just keep repeating. It&#x27;s not fixing the problem.&rdquo;
+    <cite>&mdash; Russell, 85-min meeting</cite></blockquote>
+  <p class="card-logic">Card A at the provider&#x27;s default thinking budget.</p>
+  <hr class="card-rule">
+  <div class="card-numbers">
+    <span>caught 1 of 2 required</span>
+    <span>false fires 5</span>
+    <span>contract 10 of 10</span>
+  </div>
+  <div class="card-numbers card-numbers-2">
+    <div class="floor-line floor-fail">a mute coach scores the same</div>
+    <span class="latency">model call only &middot; p95 271.5s</span>
+  </div>
+  
+</div>
+<div class="arch-card" id="card-M-hold-gate" data-arch="M-hold-gate">
+  <div class="card-head">
+    <div class="card-title">M-hold-gate &middot; M-hold-gate
+      <span class="status status-done">done</span></div>
+    <div class="card-iter">iter 1 &middot; 1 runs</div>
+  </div>
+  <blockquote class="card-quote">&ldquo;&rdquo;
+    <cite>&mdash; </cite></blockquote>
+  <p class="card-logic">Silence is decided first, by a separate call that is structurally unable to fire. Attacks: the six false fires that reproduced under every thinking setting.</p>
+  <hr class="card-rule">
+  <div class="card-numbers">
+    <span>caught 2 of 2 required</span>
+    <span>false fires 0</span>
+    <span>contract 10 of 10</span>
+  </div>
+  <div class="card-numbers card-numbers-2">
+    <div class="floor-line floor-pass">above the silent floor &#10003;</div>
+    <span class="latency">model call only &middot; p95 58.6s</span>
+  </div>
+  
+</div>
+<div class="arch-card greyed" id="card-N-answerable" data-arch="N-answerable">
+  <div class="card-head">
+    <div class="card-title">N-answerable &middot; ANSWERABLE BY THE REP
+      <span class="status status-done">done</span></div>
+    <div class="card-iter">iter 1 &middot; 1 runs</div>
+  </div>
+  <blockquote class="card-quote">&ldquo;unfortunately, I&#x27;m too skilled at my conversations for it to learn from&rdquo;
+    <cite>&mdash; Russell, 85-min meeting</cite></blockquote>
+  <p class="card-logic">Predicts what the rep would do in four seconds of silence and fires only on the gap. Attacks: the coach must catch the miss, not narrate the hit.</p>
+  <hr class="card-rule">
+  <div class="card-numbers">
+    <span>caught 2 of 2 required</span>
+    <span>false fires 5</span>
+    <span>contract 10 of 10</span>
+  </div>
+  <div class="card-numbers card-numbers-2">
+    <div class="floor-line floor-fail">a mute coach scores the same</div>
+    <span class="latency">model call only &middot; p95 62.7s</span>
+  </div>
+  
+</div>
+<div class="arch-card" id="card-P-span-first" data-arch="P-span-first">
+  <div class="card-head">
+    <div class="card-title">P-span-first &middot; P-span-first
+      <span class="status status-done">done</span></div>
+    <div class="card-iter">iter 1 &middot; 1 runs</div>
+  </div>
+  <blockquote class="card-quote">&ldquo;&rdquo;
+    <cite>&mdash; </cite></blockquote>
+  <p class="card-logic">Copies the exact words it reacts to before naming the signal; the card must be derivable from that span alone. Attacks: the 74/78 referral misread.</p>
+  <hr class="card-rule">
+  <div class="card-numbers">
+    <span>caught 2 of 2 required</span>
+    <span>false fires 0</span>
+    <span>contract 10 of 10</span>
+  </div>
+  <div class="card-numbers card-numbers-2">
+    <div class="floor-line floor-pass">above the silent floor &#10003;</div>
+    <span class="latency">model call only &middot; p95 6.0s</span>
+  </div>
+  
+</div>
+<div class="arch-card" id="card-Q-span-level" data-arch="Q-span-level">
+  <div class="card-head">
+    <div class="card-title">Q-span-level &middot; Q-span-level
+      <span class="status status-done">done</span></div>
+    <div class="card-iter">iter 1 &middot; 1 runs</div>
+  </div>
+  <blockquote class="card-quote">&ldquo;&rdquo;
+    <cite>&mdash; </cite></blockquote>
+  <p class="card-logic">P&#x27;s span-first read on M&#x27;s hold gate, with N&#x27;s level-4 test. Composition of the three things that each worked alone.</p>
+  <hr class="card-rule">
+  <div class="card-numbers">
+    <span>caught 2 of 2 required</span>
+    <span>false fires 0</span>
+    <span>contract 10 of 10</span>
+  </div>
+  <div class="card-numbers card-numbers-2">
+    <div class="floor-line floor-pass">above the silent floor &#10003;</div>
+    <span class="latency">model call only &middot; p95 303.9s</span>
+  </div>
+  
+</div>
+</div>
+</section>
+
+
+<section class="favourites">
+  <h2>Favourites</h2>
+  
+</section>
+
+
+<section class="compare">
+  <h2>Compare</h2>
+  <p class="compare-note">Pick two or three architectures. The same call, the same lines, one column per
+    architecture. Holds are a dot. Fires are the card. Gold disagreement is marked on the cell.</p>
+  <div class="compare-controls">
+    <label class="silent-toggle"><input type="checkbox" id="show-silent"> show silent, agreeing lines</label>
+    <span id="quiet-summary" class="quiet-summary"></span>
+  </div>
+  <div class="compare-scroll">
+  <table class="compare-table">
+    <thead><tr><th class="line-head">line</th><th data-arch-col="A-nothink"><label class="arch-toggle-label"><input type="checkbox" class="arch-toggle" value="A-nothink" checked> A-nothink &middot; SIGNAL DICTIONARY, no thinking</label></th><th data-arch-col="A-signal-dictionary"><label class="arch-toggle-label"><input type="checkbox" class="arch-toggle" value="A-signal-dictionary" checked> A-signal-dictionary &middot; SIGNAL DICTIONARY</label></th><th data-arch-col="A-signal-dictionary-nothink"><label class="arch-toggle-label"><input type="checkbox" class="arch-toggle" value="A-signal-dictionary-nothink" checked> A-signal-dictionary-nothink &middot; SIGNAL DICTIONARY, dead run</label></th><th data-arch-col="A-thinking"><label class="arch-toggle-label"><input type="checkbox" class="arch-toggle" value="A-thinking" > A-thinking &middot; SIGNAL DICTIONARY, full thinking</label></th><th data-arch-col="M-hold-gate"><label class="arch-toggle-label"><input type="checkbox" class="arch-toggle" value="M-hold-gate" > M-hold-gate &middot; M-hold-gate</label></th><th data-arch-col="N-answerable"><label class="arch-toggle-label"><input type="checkbox" class="arch-toggle" value="N-answerable" > N-answerable &middot; ANSWERABLE BY THE REP</label></th><th data-arch-col="P-span-first"><label class="arch-toggle-label"><input type="checkbox" class="arch-toggle" value="P-span-first" > P-span-first &middot; P-span-first</label></th><th data-arch-col="Q-span-level"><label class="arch-toggle-label"><input type="checkbox" class="arch-toggle" value="Q-span-level" > Q-span-level &middot; Q-span-level</label></th></tr></thead>
+    <tbody><tr class="compare-row" data-decisions='{"A-nothink": "HOLD", "A-signal-dictionary": "HOLD", "A-signal-dictionary-nothink": "HOLD", "A-thinking": "HOLD", "M-hold-gate": "HOLD", "N-answerable": "HOLD", "P-span-first": "HOLD", "Q-span-level": "HOLD"}'><td class="line-cell"><span class="who">buyer</span> <span class="quote">We went to Hawaii. The four of us went and had a great time.</span><span class="gloss">pure rapport, opening story — one of the five mandatory killer inputs (instructions.txt sec 6.5)</span></td><td class="cell hold" data-arch-col="A-nothink" title="buyer is sharing personal information"><span class="dot">&middot;</span></td><td class="cell hold" data-arch-col="A-signal-dictionary" title="buyer shares personal information"><span class="dot">&middot;</span></td><td class="cell" data-arch-col="A-signal-dictionary-nothink">n/a</td><td class="cell hold" data-arch-col="A-thinking" title="Buyer is sharing personal details, seller is already engaging."><span class="dot">&middot;</span></td><td class="cell hold" data-arch-col="M-hold-gate" title="buyer is sharing personal details"><span class="dot">&middot;</span></td><td class="cell hold" data-arch-col="N-answerable" title="buyer shares personal context"><span class="dot">&middot;</span></td><td class="cell hold" data-arch-col="P-span-first" title="buyer is sharing personal details"><span class="dot">&middot;</span></td><td class="cell hold" data-arch-col="Q-span-level" title="buyer is sharing personal details, not business related"><span class="dot">&middot;</span></td></tr><tr class="compare-row" data-decisions='{"A-nothink": "FIRE", "A-signal-dictionary": "FIRE", "A-signal-dictionary-nothink": "HOLD", "A-thinking": "FIRE", "M-hold-gate": "FIRE", "N-answerable": "FIRE", "P-span-first": "FIRE", "Q-span-level": "FIRE"}'><td class="line-cell"><span class="who">buyer</span> <span class="quote">the layoff of about 1,200 people</span><span class="gloss">the human-risk frame — mandate + December deadline + 1,200-person layoff. The project&#x27;s namesake moment (claude/findings/02-gold-anchoring.md sec 3).</span></td><td class="cell fire fabricated" data-arch-col="A-nothink" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">fabricated quote</span><br><span class="fire-signal">Buyer offers partnership</span></td><td class="cell fire correct" data-arch-col="A-signal-dictionary" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10003;</span><br><span class="fire-signal">Buyer offers partnership</span></td><td class="cell" data-arch-col="A-signal-dictionary-nothink">n/a</td><td class="cell fire fabricated" data-arch-col="A-thinking" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">fabricated quote</span><br><span class="fire-signal">Clarify call purpose</span></td><td class="cell fire fabricated" data-arch-col="M-hold-gate" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">fabricated quote</span><br><span class="fire-signal">Buyer articulates value</span></td><td class="cell fire correct" data-arch-col="N-answerable" title=""><span class="fire-level">FIRE L4</span> <span class="fire-mark">&#10003;</span><br><span class="fire-signal">Buyer offers partnership</span></td><td class="cell fire correct" data-arch-col="P-span-first" title=""><span class="fire-level">FIRE L4</span> <span class="fire-mark">&#10003;</span><br><span class="fire-signal">Buyer reveals client mandate.</span></td><td class="cell fire correct" data-arch-col="Q-span-level" title=""><span class="fire-level">FIRE L4</span> <span class="fire-mark">&#10003;</span><br><span class="fire-signal">Buyer details client&#x27;s pain</span></td></tr><tr class="compare-row" data-decisions='{"A-nothink": "HOLD", "A-signal-dictionary": "HOLD", "A-signal-dictionary-nothink": "HOLD", "A-thinking": "HOLD", "M-hold-gate": "HOLD", "N-answerable": "HOLD", "P-span-first": "HOLD", "Q-span-level": "HOLD"}'><td class="line-cell"><span class="who">buyer</span> <span class="quote">I&#x27;m a coach to founders and also to executives</span><span class="gloss">value-exchange frame, same turn as G3. docx sec 5: HOLD L2 because the stake already fired one span earlier — fires only the first time the frame appears. NOTE: docs/grok-feedback.txt id 304 scores this FIRE; gold-v3 overrules it (claude/findings/02-gold-anchoring.md sec 5). This run is pinned to gold-v3.</span></td><td class="cell" data-arch-col="A-nothink">n/a</td><td class="cell" data-arch-col="A-signal-dictionary">n/a</td><td class="cell" data-arch-col="A-signal-dictionary-nothink">n/a</td><td class="cell" data-arch-col="A-thinking">n/a</td><td class="cell" data-arch-col="M-hold-gate">n/a</td><td class="cell" data-arch-col="N-answerable">n/a</td><td class="cell" data-arch-col="P-span-first">n/a</td><td class="cell" data-arch-col="Q-span-level">n/a</td></tr><tr class="compare-row" data-decisions='{"A-nothink": "HOLD", "A-signal-dictionary": "HOLD", "A-signal-dictionary-nothink": "HOLD", "A-thinking": "HOLD", "M-hold-gate": "HOLD", "N-answerable": "HOLD", "P-span-first": "HOLD", "Q-span-level": "HOLD"}'><td class="line-cell"><span class="who">buyer</span> <span class="quote">my wheelhouse is 100% the leadership side</span><span class="gloss">role disclosure — informational, not a deal-state change</span></td><td class="cell hold" data-arch-col="A-nothink" title="buyer describes their coaching focus"><span class="dot">&middot;</span></td><td class="cell hold" data-arch-col="A-signal-dictionary" title="buyer is still describing his wheelhouse"><span class="dot">&middot;</span></td><td class="cell" data-arch-col="A-signal-dictionary-nothink">n/a</td><td class="cell hold" data-arch-col="A-thinking" title="Buyer is clearly explaining their expertise."><span class="dot">&middot;</span></td><td class="cell hold" data-arch-col="M-hold-gate" title="buyer is describing their expertise"><span class="dot">&middot;</span></td><td class="cell hold" data-arch-col="N-answerable" title="buyer just detailed his core expertise"><span class="dot">&middot;</span></td><td class="cell hold" data-arch-col="P-span-first" title="buyer describes their own coaching focus"><span class="dot">&middot;</span></td><td class="cell hold" data-arch-col="Q-span-level" title="buyer describes their coaching focus"><span class="dot">&middot;</span></td></tr><tr class="compare-row" data-decisions='{"A-nothink": "FIRE", "A-signal-dictionary": "FIRE", "A-signal-dictionary-nothink": "HOLD", "A-thinking": "FIRE", "M-hold-gate": "HOLD", "N-answerable": "FIRE", "P-span-first": "HOLD", "Q-span-level": "FIRE"}'><td class="line-cell"><span class="who">buyer</span> <span class="quote">It&#x27;s trust and connection and a sense of we should work together.</span><span class="gloss">buyer names his own closing criterion, unprompted — optional_if the seller mirrors it downstream (claude/ARCHITECTURES.md gold-v3 note)</span></td><td class="cell fire fabricated" data-arch-col="A-nothink" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">fabricated quote</span><br><span class="fire-signal">Buyer corrects seller</span></td><td class="cell fire correct" data-arch-col="A-signal-dictionary" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10003;</span><br><span class="fire-signal">Buyer clarifies intent</span></td><td class="cell" data-arch-col="A-signal-dictionary-nothink">n/a</td><td class="cell fire fabricated" data-arch-col="A-thinking" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">fabricated quote</span><br><span class="fire-signal">Acknowledge readiness</span></td><td class="cell hold miss" data-arch-col="M-hold-gate" title="buyer clarifies their answer to seller&#x27;s question"><span class="dot">&middot;</span><span class="miss-label">missed</span></td><td class="cell fire correct" data-arch-col="N-answerable" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10003;</span><br><span class="fire-signal">Buyer offers value</span></td><td class="cell hold miss" data-arch-col="P-span-first" title="buyer clarifies their own criteria for closing"><span class="dot">&middot;</span><span class="miss-label">missed</span></td><td class="cell fire correct" data-arch-col="Q-span-level" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10003;</span><br><span class="fire-signal">Buyer states closing criteria</span></td></tr><tr class="compare-row" data-decisions='{"A-nothink": "FIRE", "A-signal-dictionary": "FIRE", "A-signal-dictionary-nothink": "HOLD", "A-thinking": "FIRE", "M-hold-gate": "HOLD", "N-answerable": "FIRE", "P-span-first": "HOLD", "Q-span-level": "HOLD"}'><td class="line-cell"><span class="who">buyer</span> <span class="quote">Based on a couple of emails?</span><span class="gloss">product-mechanics question, mandatory killer input — the rep can answer it directly</span></td><td class="cell fire fabricated" data-arch-col="A-nothink" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><span class="fire-note">fabricated quote</span><br><span class="fire-signal">Buyer questions implementation</span></td><td class="cell fire false-fire" data-arch-col="A-signal-dictionary" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><br><span class="fire-signal">Buyer questions implementation</span></td><td class="cell" data-arch-col="A-signal-dictionary-nothink">n/a</td><td class="cell fire fabricated" data-arch-col="A-thinking" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><span class="fire-note">fabricated quote</span><br><span class="fire-signal">Explain core mechanism</span></td><td class="cell hold" data-arch-col="M-hold-gate" title="product-mechanics or process"><span class="dot">&middot;</span></td><td class="cell fire false-fire" data-arch-col="N-answerable" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><br><span class="fire-signal">Asks for data source</span></td><td class="cell hold" data-arch-col="P-span-first" title="product-mechanics or process"><span class="dot">&middot;</span></td><td class="cell hold" data-arch-col="Q-span-level" title="product-mechanics or process"><span class="dot">&middot;</span></td></tr><tr class="compare-row" data-decisions='{"A-nothink": "FIRE", "A-signal-dictionary": "FIRE", "A-signal-dictionary-nothink": "HOLD", "A-thinking": "FIRE", "M-hold-gate": "HOLD", "N-answerable": "FIRE", "P-span-first": "HOLD", "Q-span-level": "HOLD"}'><td class="line-cell"><span class="who">buyer</span> <span class="quote">How long has the product been available?</span><span class="gloss">logistics question, exact-substring anchor (sim 1.00)</span></td><td class="cell fire fabricated" data-arch-col="A-nothink" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><span class="fire-note">fabricated quote</span><br><span class="fire-signal">Buyer asks about product history</span></td><td class="cell fire false-fire" data-arch-col="A-signal-dictionary" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><br><span class="fire-signal">Buyer asks about product history</span></td><td class="cell" data-arch-col="A-signal-dictionary-nothink">n/a</td><td class="cell fire fabricated" data-arch-col="A-thinking" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><span class="fire-note">fabricated quote</span><br><span class="fire-signal">Address product maturity</span></td><td class="cell hold" data-arch-col="M-hold-gate" title="product-mechanics or process"><span class="dot">&middot;</span></td><td class="cell fire false-fire" data-arch-col="N-answerable" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><br><span class="fire-signal">Asks product availability</span></td><td class="cell hold" data-arch-col="P-span-first" title="product mechanics or process"><span class="dot">&middot;</span></td><td class="cell hold" data-arch-col="Q-span-level" title="product mechanics or process"><span class="dot">&middot;</span></td></tr><tr class="compare-row" data-decisions='{"A-nothink": "FIRE", "A-signal-dictionary": "FIRE", "A-signal-dictionary-nothink": "HOLD", "A-thinking": "FIRE", "M-hold-gate": "HOLD", "N-answerable": "FIRE", "P-span-first": "HOLD", "Q-span-level": "HOLD"}'><td class="line-cell"><span class="who">buyer</span> <span class="quote">I would love to see your product in action.</span><span class="gloss">ordinary demo interest, not yet the killer input — that is G9b, three turns later</span></td><td class="cell fire fabricated" data-arch-col="A-nothink" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><span class="fire-note">fabricated quote</span><br><span class="fire-signal">Express interest in demo</span></td><td class="cell fire false-fire" data-arch-col="A-signal-dictionary" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><br><span class="fire-signal">Buyer expresses interest</span></td><td class="cell" data-arch-col="A-signal-dictionary-nothink">n/a</td><td class="cell fire fabricated" data-arch-col="A-thinking" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><span class="fire-note">fabricated quote</span><br><span class="fire-signal">Schedule demo</span></td><td class="cell hold" data-arch-col="M-hold-gate" title="demo or scheduling logistics"><span class="dot">&middot;</span></td><td class="cell fire false-fire" data-arch-col="N-answerable" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><br><span class="fire-signal">Requests product demo</span></td><td class="cell hold" data-arch-col="P-span-first" title="demo or scheduling logistics"><span class="dot">&middot;</span></td><td class="cell hold" data-arch-col="Q-span-level" title="demo or scheduling logistics"><span class="dot">&middot;</span></td></tr><tr class="compare-row" data-decisions='{"A-nothink": "FIRE", "A-signal-dictionary": "HOLD", "A-signal-dictionary-nothink": "HOLD", "A-thinking": "FIRE", "M-hold-gate": "HOLD", "N-answerable": "FIRE", "P-span-first": "HOLD", "Q-span-level": "HOLD"}'><td class="line-cell"><span class="who">buyer</span> <span class="quote">I want to stay as quiet as possible and see how user-friendly the model is.</span><span class="gloss">UX-test-in-silence, mandatory killer input — a card here interrupts the exact test the buyer asked to run alone</span></td><td class="cell fire fabricated" data-arch-col="A-nothink" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><span class="fire-note">fabricated quote</span><br><span class="fire-signal">Buyer offers to test</span></td><td class="cell" data-arch-col="A-signal-dictionary">n/a</td><td class="cell" data-arch-col="A-signal-dictionary-nothink">n/a</td><td class="cell fire fabricated" data-arch-col="A-thinking" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><span class="fire-note">fabricated quote</span><br><span class="fire-signal">Adapt demo approach</span></td><td class="cell hold" data-arch-col="M-hold-gate" title="left-alone with product"><span class="dot">&middot;</span></td><td class="cell fire false-fire" data-arch-col="N-answerable" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><br><span class="fire-signal">Buyer offers to test</span></td><td class="cell hold" data-arch-col="P-span-first" title="left-alone with the product, to evaluate or try it in silence"><span class="dot">&middot;</span></td><td class="cell hold" data-arch-col="Q-span-level" title="left-alone with the product"><span class="dot">&middot;</span></td></tr><tr class="compare-row" data-decisions='{"A-nothink": "FIRE", "A-signal-dictionary": "FIRE", "A-signal-dictionary-nothink": "HOLD", "A-thinking": "ERROR", "M-hold-gate": "FIRE", "N-answerable": "FIRE", "P-span-first": "FIRE", "Q-span-level": "FIRE"}'><td class="line-cell"><span class="who">buyer</span> <span class="quote">I certainly know people who, you know, might be interested in this for their sales efforts</span><span class="gloss">connector/referral offer, mandatory killer input. Sits on the corrected half of a merged, mislabelled line (claude/findings/01-transcript-integrity.md sec 2, claude/findings/02-gold-anchoring.md sec 2) — a naive buyer-turn gate never offers this decision point at all.</span></td><td class="cell fire fabricated" data-arch-col="A-nothink" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">fabricated quote</span><br><span class="fire-signal">Buyer offers coaching</span></td><td class="cell fire fabricated" data-arch-col="A-signal-dictionary" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">fabricated quote</span><br><span class="fire-signal">Buyer offers coaching</span></td><td class="cell" data-arch-col="A-signal-dictionary-nothink">n/a</td><td class="cell hold miss" data-arch-col="A-thinking" title=""><span class="dot">&middot;</span><span class="miss-label">missed</span></td><td class="cell fire fabricated" data-arch-col="M-hold-gate" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">fabricated quote</span><br><span class="fire-signal">Buyer offers help</span></td><td class="cell fire correct" data-arch-col="N-answerable" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10003;</span><br><span class="fire-signal">Offers reciprocal help</span></td><td class="cell fire correct" data-arch-col="P-span-first" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10003;</span><br><span class="fire-signal">Buyer offers two forms of help</span></td><td class="cell fire correct" data-arch-col="Q-span-level" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10003;</span><br><span class="fire-signal">Buyer offers two forms of help</span></td></tr><tr class="compare-row" data-decisions='{"A-nothink": "FIRE", "A-signal-dictionary": "FIRE", "A-signal-dictionary-nothink": "HOLD", "A-thinking": "FIRE", "M-hold-gate": "HOLD", "N-answerable": "FIRE", "P-span-first": "HOLD", "Q-span-level": "HOLD"}'><td class="line-cell"><span class="who">buyer</span> <span class="quote">Well, keep me posted. You have my, you have my digits when you&#x27;re ready to send it over.</span><span class="gloss">the close — capture for BRI / post-call, do not interrupt a courteous sign-off</span></td><td class="cell fire fabricated" data-arch-col="A-nothink" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><span class="fire-note">fabricated quote</span><br><span class="fire-signal">Buyer commits next step</span></td><td class="cell fire false-fire" data-arch-col="A-signal-dictionary" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><br><span class="fire-signal">Buyer commits next step</span></td><td class="cell" data-arch-col="A-signal-dictionary-nothink">n/a</td><td class="cell fire fabricated" data-arch-col="A-thinking" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><span class="fire-note">fabricated quote</span><br><span class="fire-signal">Confirm next action</span></td><td class="cell hold" data-arch-col="M-hold-gate" title="left-alone"><span class="dot">&middot;</span></td><td class="cell fire false-fire" data-arch-col="N-answerable" title=""><span class="fire-level">FIRE L3</span> <span class="fire-mark">&#10007;</span><span class="fire-note">false fire</span><br><span class="fire-signal">Buyer offers contact info.</span></td><td class="cell hold" data-arch-col="P-span-first" title="left-alone"><span class="dot">&middot;</span></td><td class="cell hold" data-arch-col="Q-span-level" title="left-alone"><span class="dot">&middot;</span></td></tr></tbody>
+  </table>
+  </div>
+</section>
+
+<div class="foot">Built by claude/report/build.py from claude/report/fixtures/. Every number traces to a
+  field in a run.json, gold-moments.json, or silent-floor.json &mdash; nothing on this page is hand-typed.
+  Reproduce: <code>python3 claude/report/build.py</code></div>
+</main>
+<script>
+(function(){
+  function recompute(){
+    var checked = Array.prototype.slice.call(document.querySelectorAll('.arch-toggle:checked'))
+      .map(function(c){ return c.value; });
+    document.querySelectorAll('[data-arch-col]').forEach(function(el){
+      el.style.display = checked.indexOf(el.getAttribute('data-arch-col')) === -1 ? 'none' : '';
+    });
+    var rows = document.querySelectorAll('tr.compare-row');
+    rows.forEach(function(row){
+      var decisions = JSON.parse(row.getAttribute('data-decisions'));
+      var allHold = checked.every(function(a){ return decisions[a] === 'HOLD'; });
+      row.classList.toggle('quiet-row', allHold && checked.length > 0);
+    });
+    var quiet = document.querySelectorAll('tr.compare-row.quiet-row').length;
+    var showSilent = document.getElementById('show-silent').checked;
+    document.querySelectorAll('tr.compare-row.quiet-row').forEach(function(row){
+      row.style.display = showSilent ? 'table-row' : 'none';
+    });
+    var summary = document.getElementById('quiet-summary');
+    var total = rows.length;
+    summary.textContent = quiet + ' of ' + total + ' lines silent and agreeing across the ' +
+      checked.length + ' selected — ' + (showSilent ? 'shown' : 'hidden, click to open');
+  }
+  document.querySelectorAll('.arch-toggle, #show-silent').forEach(function(el){
+    el.addEventListener('change', recompute);
+  });
+  recompute();
+})();
+</script>
+</body>
+</html>
