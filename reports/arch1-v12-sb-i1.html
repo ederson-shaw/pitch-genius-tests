@@ -1,0 +1,130 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>arch1 variant-12 iter-1 — scenario-B line replay</title>
+<style>
+:root{--paper:#fbfaf7;--ink:#1c1a17;--ink2:#5c5750;--ink3:#8a847a;--line:#e4e0d8;
+--accent:#b3541e;--red:#b3261e;--serif:'Fraunces',Georgia,'Iowan Old Style',serif;
+--sans:'Hanken Grotesk',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace}
+@media(prefers-color-scheme:dark){:root{--paper:#191713;--ink:#e9e5dc;--ink2:#a8a297;
+--ink3:#7a746a;--line:#2e2a24;--accent:#d97a44;--red:#e57368}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);
+font-family:var(--sans);font-size:16px;line-height:1.6}
+main{max-width:920px;margin:0 auto;padding:40px 20px 120px}
+h1{font-family:var(--serif);font-size:2.4rem;line-height:1.1;margin:0 0 .2em;letter-spacing:-.01em}
+.lede{color:var(--ink2);font-family:var(--serif);font-size:1.2rem;margin:0 0 12px}
+.meta{color:var(--ink3);font-size:12.5px;display:flex;gap:14px;flex-wrap:wrap;margin:0 0 28px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 34px}
+.kpi{border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+.kpi .n{font-family:var(--serif);font-size:1.9rem;font-variant-numeric:tabular-nums;font-weight:600}
+.kpi.bad .n{color:var(--red)}.kpi .l{color:var(--ink3);font-size:11px;text-transform:uppercase;letter-spacing:.07em;margin-top:3px}
+h2{font-family:var(--serif);font-size:1.45rem;margin:2.2em 0 .5em}
+.moment{border-left:2px solid transparent;padding:7px 0 7px 14px;margin:0 0 2px;border-radius:3px}
+.moment.mismatch{border-left-color:var(--red)}
+.moment.goldfire{border-left-color:var(--accent)}
+.mrow{display:flex;gap:12px;align-items:baseline}
+.t{font-family:var(--mono);font-size:11.5px;color:var(--ink3);min-width:52px}
+.who{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink2);min-width:64px}
+.said{font-family:var(--serif);font-size:16.5px}
+.gold{font-size:11px;color:var(--accent);font-family:var(--mono)}
+.act{margin:3px 0 0 78px;font-size:13.5px;color:var(--ink2)}
+.act.fire{color:var(--ink)}
+.chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;padding:1px 7px;border-radius:20px;border:1px solid var(--line)}
+.chip.f{background:var(--accent);color:#fff;border-color:var(--accent)}
+.card{margin:6px 0 8px 78px;border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+.fld{font-size:13.5px;margin:2px 0}.fld b{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink3);font-weight:600}
+.mm{margin:2px 0 0 78px;font-size:12.5px;color:var(--red)}
+details{margin:10px 0 0 78px}summary{cursor:pointer;font-size:12.5px;color:var(--ink3)}
+pre{background:color-mix(in srgb,var(--ink) 6%,transparent);padding:10px;border-radius:6px;
+font-size:11.5px;overflow-x:auto;font-family:var(--mono);white-space:pre-wrap}
+footer{color:var(--ink3);font-size:12px;border-top:1px solid var(--line);margin-top:48px;padding-top:14px}
+nav.toc{position:sticky;top:16px;align-self:start}nav.toc a{color:var(--ink3);text-decoration:none;display:block;padding:3px 8px;font-size:13px}
+nav.toc a:hover{color:var(--ink)}
+@media print{nav.toc,.no-print{display:none}.kpis{grid-template-columns:repeat(4,1fr)}}
+</style></head><body><main>
+<h1>Live Coach — arch1 / variant-12 / iter-1</h1>
+<p class="lede">scenario-B replayed line by line; the coach decided after every buyer line. Gold: 10 anchored moments (6 required fires).</p>
+<p class="meta"><span>model gemini-2.5-flash</span><span>standard gold-v3-dressler-11-linereplay</span>
+<span>run 2026-08-28T04:56:58</span><span>variant sha b7e63215e622</span></p>
+<div class="kpis">
+<div class="kpi"><div class="n">6</div><div class="l">fires (gold catches)</div></div>
+<div class="kpi bad"><div class="n">2</div><div class="l">false fires</div></div>
+<div class="kpi"><div class="n">0</div><div class="l">missed required</div></div>
+<div class="kpi"><div class="n">1198</div><div class="l">p50 ms</div></div>
+</div>
+<h2 id="transcript">Transcript — every decision in order</h2>
+<div class="moment" id="L2"><div class="mrow"><span class="t">L2</span><span class="who">Tanya</span><span class="said">Priya, good to see you again. Agenda as promised: fifteen minutes on manager workflows, ten on rollout, then next steps. Anything you want to change?</span><span class="gold">gold HOLD L2</span></div></div><div class="moment mismatch" id="L4"><div class="mrow"><span class="t">L4</span><span class="who">Priya</span><span class="said">That works. Quick context since our last call: we&#x27;re eighteen reps now, and I&#x27;ll say the quiet part — CallTape didn&#x27;t die here because of features. It died because after eight months exactly nobody opened it.</span><span class="gold">gold FIRE L3</span></div><div class="act"><span class="chip">HOLD</span> — buyer giving opening story and context</div><div class="mm">missed fire — gold: The buyer opened with the failure that defines the evaluation (L4) and the seller started a home-screen tour a</div></div><div class="moment goldfire" id="L6"><div class="mrow"><span class="t">L6</span><span class="who">Tanya</span><span class="said">Understood. So let me start with the home screen — you&#x27;ve got the rep leaderboard, the trend carousel, the talk-ratio widgets, the coaching streak tracker, and the library filters, which I&#x27;ll come back to.</span><span class="gold">gold FIRE L3</span></div></div><div class="moment goldfire" id="L8"><div class="mrow"><span class="t">L8</span><span class="who">Priya</span><span class="said">Tanya — can we skip to the manager review piece? That&#x27;s the exact corner where CallTape died. If a manager won&#x27;t use it, nothing else matters.</span><span class="gold">gold FIRE L3</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Name the manager review</div><div class="fld"><b>WHY IT MATTERS</b> CallTape died there</div><div class="fld"><b>NEXT BEST MOVE</b> Focus on manager workflow</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 3
+SIGNAL: Name the manager review
+WHY IT MATTERS: CallTape died there
+NEXT BEST MOVE: Focus on manager workflow</pre></details></div><div class="moment" id="L10"><div class="mrow"><span class="t">L10</span><span class="who">Tanya</span><span class="said">Fair. Jumping there now. So this is the review queue: one screen, every flagged call, sorted by what changed week over week.</span><span class="gold">gold HOLD L2</span></div></div><div class="moment mismatch" id="L12"><div class="mrow"><span class="t">L12</span><span class="who">Priya</span><span class="said">Good. Before you keep going — give me ten minutes to poke at this screen myself. No tour. I&#x27;ll tell you exactly where I get lost, that&#x27;s how I need to evaluate it.</span><span class="gold">gold HOLD L2</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Buyer wants self-test</div><div class="fld"><b>WHY IT MATTERS</b> Needs to evaluate it herself</div><div class="fld"><b>NEXT BEST MOVE</b> Offer the ten minutes</div></div><div class="mm">false fire — gold: G9 analog: buyer explicitly requested silent self-evaluation; the seller agreed and went quiet. Any card durin</div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 3
+SIGNAL: Buyer wants self-test
+WHY IT MATTERS: Needs to evaluate it herself
+NEXT BEST MOVE: Offer the ten minutes</pre></details></div><div class="moment goldfire" id="L14"><div class="mrow"><span class="t">L14</span><span class="who">Tanya</span><span class="said">Deal. I&#x27;ll mute myself. Take your time.</span><span class="gold">gold FIRE L3</span></div></div><div class="moment goldfire" id="L16"><div class="mrow"><span class="t">L16</span><span class="who">Priya</span><span class="said">Okay, first hit — I filtered to disputed calls and the score column went blank. My managers would close this tab right here and never come back.</span><span class="gold">gold FIRE L3</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Buyer found a critical bug</div><div class="fld"><b>WHY IT MATTERS</b> Managers would close the tab</div><div class="fld"><b>NEXT BEST MOVE</b> Offer to fix it now</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 4
+SIGNAL: Buyer found a critical bug
+WHY IT MATTERS: Managers would close the tab
+NEXT BEST MOVE: Offer to fix it now</pre></details></div><div class="moment goldfire" id="L18"><div class="mrow"><span class="t">L18</span><span class="who">Tanya</span><span class="said">Ah — there&#x27;s a power-user setting that keeps scores visible in filtered views. I&#x27;ll enable it in your sandbox. Anyway, as I was showing, the leaderboard also has—</span><span class="gold">gold FIRE L3</span></div></div><div class="moment goldfire" id="L20"><div class="mrow"><span class="t">L20</span><span class="who">Priya</span><span class="said">It&#x27;s not the setting. The setting is the problem. My managers get maybe thirty minutes a week for coaching. Anything that needs configuring before it works is something they won&#x27;t do.</span><span class="gold">gold FIRE L3</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Buyer rejects configuration</div><div class="fld"><b>WHY IT MATTERS</b> Managers won&#x27;t configure for thirty minutes coaching</div><div class="fld"><b>NEXT BEST MOVE</b> Offer a pre-configured setup</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 4
+SIGNAL: Buyer rejects configuration
+WHY IT MATTERS: Managers won&#x27;t configure for thirty minutes coaching
+NEXT BEST MOVE: Offer a pre-configured setup</pre></details></div><div class="moment goldfire" id="L22"><div class="mrow"><span class="t">L22</span><span class="who">Tanya</span><span class="said">Right — and that&#x27;s why we include the full onboarding program: six weeks, weekly manager training sessions, a configuration workshop, certification for your admins.</span><span class="gold">gold FIRE L3</span></div></div><div class="moment goldfire" id="L24"><div class="mrow"><span class="t">L24</span><span class="who">Priya</span><span class="said">You&#x27;re hearing me backwards. More program is the opposite of what I said. And underneath the process worry is a trust worry — if managers don&#x27;t trust the scores, reps will game them, and we are back to CallTape with a different logo.</span><span class="gold">gold FIRE L3</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Buyer fears trust breakdown</div><div class="fld"><b>WHY IT MATTERS</b> Reps will game scores</div><div class="fld"><b>NEXT BEST MOVE</b> Address trust directly</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 4
+SIGNAL: Buyer fears trust breakdown
+WHY IT MATTERS: Reps will game scores
+NEXT BEST MOVE: Address trust directly</pre></details></div><div class="moment goldfire" id="L26"><div class="mrow"><span class="t">L26</span><span class="who">Tanya</span><span class="said">The scores are ninety-four percent aligned with human QA raters — we benchmark it every release. There&#x27;s a calibration report in the admin panel you can audit anytime.</span><span class="gold">gold FIRE L3</span></div></div><div class="moment goldfire" id="L28"><div class="mrow"><span class="t">L28</span><span class="who">Priya</span><span class="said">Numbers like that I take to our head of RevOps, Daniel — and I&#x27;ll warn you now, he&#x27;s the one who killed CallTape. Killed it over data retention. He&#x27;ll ask where the raw audio lives and how long you keep it.</span><span class="gold">gold FIRE L3</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Buyer names Daniel as RevOps head</div><div class="fld"><b>WHY IT MATTERS</b> Daniel killed CallTape over data retention</div><div class="fld"><b>NEXT BEST MOVE</b> Ask about Daniel&#x27;s data retention needs</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 4
+SIGNAL: Buyer names Daniel as RevOps head
+WHY IT MATTERS: Daniel killed CallTape over data retention
+NEXT BEST MOVE: Ask about Daniel&#x27;s data retention needs</pre></details></div><div class="moment goldfire" id="L30"><div class="mrow"><span class="t">L30</span><span class="who">Tanya</span><span class="said">Straight answer: audio is stored in your own tenant for ninety days, then reduced to transcripts and scores only. Retention is configurable down to thirty. Nothing leaves your region.</span><span class="gold">gold FIRE L4</span></div></div><div class="moment goldfire" id="L32"><div class="mrow"><span class="t">L32</span><span class="who">Priya</span><span class="said">Good, that&#x27;s the first answer Daniel will actually like. Now the uncomfortable one — finance approved forty-five dollars a seat and your quote says sixty. Eighteen seats, that gap is real money to me. What can move?</span><span class="gold">gold FIRE L4</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Buyer has price objection</div><div class="fld"><b>WHY IT MATTERS</b> Finance approved $45, quote is $60</div><div class="fld"><b>NEXT BEST MOVE</b> Offer to bridge the gap</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 4
+SIGNAL: Buyer has price objection
+WHY IT MATTERS: Finance approved $45, quote is $60
+NEXT BEST MOVE: Offer to bridge the gap</pre></details></div><div class="moment goldfire" id="L34"><div class="mrow"><span class="t">L34</span><span class="who">Tanya</span><span class="said">I can probably get you twenty percent off if we sign this month.</span><span class="gold">gold FIRE L4</span></div></div><div class="moment" id="L36"><div class="mrow"><span class="t">L36</span><span class="who">Priya</span><span class="said">That&#x27;s not really what I asked. Let me try differently — what would a pilot look like? Small, contained, before anyone signs anything.</span></div><div class="act"><span class="chip">HOLD</span> — buyer asks; seller answers</div></div><div class="moment" id="L38"><div class="mrow"><span class="t">L38</span><span class="who">Tanya</span><span class="said">Three reps, one manager, sixty days. We measure review-cycle adoption weekly — not scores, adoption. If managers open it unprompted by week four, that&#x27;s your signal.</span><span class="gold">gold HOLD L1</span></div></div><div class="moment mismatch" id="L40"><div class="mrow"><span class="t">L40</span><span class="who">Priya</span><span class="said">Now that I can sell. Put the pilot dates and the seat price you can actually stand behind in writing, and I&#x27;ll get Daniel&#x27;s security checklist moving in parallel.</span><span class="gold">gold HOLD L1</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Buyer wants pilot in writing</div><div class="fld"><b>WHY IT MATTERS</b> Daniel&#x27;s security checklist moves in parallel</div><div class="fld"><b>NEXT BEST MOVE</b> Lock pilot dates and price</div></div><div class="mm">false fire — gold: Complete handoff with a dated step — deliverable in writing, Daniel&#x27;s checklist in parallel, Wednesday 10:00 p</div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 4
+SIGNAL: Buyer wants pilot in writing
+WHY IT MATTERS: Daniel&#x27;s security checklist moves in parallel
+NEXT BEST MOVE: Lock pilot dates and price</pre></details></div><div class="moment" id="L42"><div class="mrow"><span class="t">L42</span><span class="who">Tanya</span><span class="said">I&#x27;ll send the one-pager today. And hold Wednesday ten o&#x27;clock — thirty minutes to walk Daniel&#x27;s checklist and the pilot plan together?</span><span class="gold">gold HOLD L1</span></div></div><div class="moment" id="L44"><div class="mrow"><span class="t">L44</span><span class="who">Priya</span><span class="said">Wednesday ten works. Send it.</span><span class="gold">gold HOLD L1</span></div><div class="act"><span class="chip">HOLD</span> — seller already locked Wednesday 10am for Daniel&#x27;s checklist and pilot plan</div></div><div class="moment" id="L46"><div class="mrow"><span class="t">L46</span><span class="who">Tanya</span><span class="said">Done. Thanks, Priya — this was a much better demo than my tour was, honestly.</span><span class="gold">gold HOLD L1</span></div></div><div class="moment" id="L48"><div class="mrow"><span class="t">L48</span><span class="who">Priya</span><span class="said">Ha. Good luck with the sandbox. Bye, Tanya.</span><span class="gold">gold HOLD L1</span></div><div class="act"><span class="chip">HOLD</span> — buyer is ending the call after agreeing to next steps</div></div>
+<h2 id="facts">Facts</h2>
+<pre>{
+ &quot;counts&quot;: {
+  &quot;decision_points&quot;: 12,
+  &quot;fires&quot;: 6,
+  &quot;false_fires&quot;: 2,
+  &quot;missed_required&quot;: 0,
+  &quot;errors&quot;: 0,
+  &quot;holds_ok&quot;: 4
+ },
+ &quot;fire&quot;: {
+  &quot;caught_at&quot;: {
+   &quot;B2&quot;: 8,
+   &quot;B4&quot;: 16,
+   &quot;B5&quot;: 20,
+   &quot;B6&quot;: 24,
+   &quot;B7&quot;: 28,
+   &quot;B8&quot;: 32
+  },
+  &quot;missed&quot;: [],
+  &quot;false_at_lines&quot;: [
+   12,
+   40
+  ]
+ },
+ &quot;optional&quot;: {
+  &quot;held&quot;: []
+ },
+ &quot;errors&quot;: [],
+ &quot;dlt&quot;: {
+  &quot;p50_ms&quot;: 1198,
+  &quot;p95_ms&quot;: 1597,
+  &quot;max_ms&quot;: 1918
+ },
+ &quot;cost&quot;: {
+  &quot;tokens_in&quot;: 25644,
+  &quot;tokens_out&quot;: 390
+ }
+}</pre>
+<footer>REAL run — Gemini decisions via Gemini-direct key. Reproduce:
+<code>python3 -m core.run --variant 12 --iter 1 --scenario B</code> ·
+raw: /home/eder/Documentos/pitch-genius-tests/glm/runs/arch1/variant-12/scenario-b-iter-1/run.json</footer>
+</main></body></html>

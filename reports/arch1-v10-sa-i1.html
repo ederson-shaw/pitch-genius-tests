@@ -1,0 +1,129 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>arch1 variant-10 iter-1 — scenario-A line replay</title>
+<style>
+:root{--paper:#fbfaf7;--ink:#1c1a17;--ink2:#5c5750;--ink3:#8a847a;--line:#e4e0d8;
+--accent:#b3541e;--red:#b3261e;--serif:'Fraunces',Georgia,'Iowan Old Style',serif;
+--sans:'Hanken Grotesk',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace}
+@media(prefers-color-scheme:dark){:root{--paper:#191713;--ink:#e9e5dc;--ink2:#a8a297;
+--ink3:#7a746a;--line:#2e2a24;--accent:#d97a44;--red:#e57368}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);
+font-family:var(--sans);font-size:16px;line-height:1.6}
+main{max-width:920px;margin:0 auto;padding:40px 20px 120px}
+h1{font-family:var(--serif);font-size:2.4rem;line-height:1.1;margin:0 0 .2em;letter-spacing:-.01em}
+.lede{color:var(--ink2);font-family:var(--serif);font-size:1.2rem;margin:0 0 12px}
+.meta{color:var(--ink3);font-size:12.5px;display:flex;gap:14px;flex-wrap:wrap;margin:0 0 28px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 34px}
+.kpi{border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+.kpi .n{font-family:var(--serif);font-size:1.9rem;font-variant-numeric:tabular-nums;font-weight:600}
+.kpi.bad .n{color:var(--red)}.kpi .l{color:var(--ink3);font-size:11px;text-transform:uppercase;letter-spacing:.07em;margin-top:3px}
+h2{font-family:var(--serif);font-size:1.45rem;margin:2.2em 0 .5em}
+.moment{border-left:2px solid transparent;padding:7px 0 7px 14px;margin:0 0 2px;border-radius:3px}
+.moment.mismatch{border-left-color:var(--red)}
+.moment.goldfire{border-left-color:var(--accent)}
+.mrow{display:flex;gap:12px;align-items:baseline}
+.t{font-family:var(--mono);font-size:11.5px;color:var(--ink3);min-width:52px}
+.who{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink2);min-width:64px}
+.said{font-family:var(--serif);font-size:16.5px}
+.gold{font-size:11px;color:var(--accent);font-family:var(--mono)}
+.act{margin:3px 0 0 78px;font-size:13.5px;color:var(--ink2)}
+.act.fire{color:var(--ink)}
+.chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;padding:1px 7px;border-radius:20px;border:1px solid var(--line)}
+.chip.f{background:var(--accent);color:#fff;border-color:var(--accent)}
+.card{margin:6px 0 8px 78px;border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+.fld{font-size:13.5px;margin:2px 0}.fld b{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink3);font-weight:600}
+.mm{margin:2px 0 0 78px;font-size:12.5px;color:var(--red)}
+details{margin:10px 0 0 78px}summary{cursor:pointer;font-size:12.5px;color:var(--ink3)}
+pre{background:color-mix(in srgb,var(--ink) 6%,transparent);padding:10px;border-radius:6px;
+font-size:11.5px;overflow-x:auto;font-family:var(--mono);white-space:pre-wrap}
+footer{color:var(--ink3);font-size:12px;border-top:1px solid var(--line);margin-top:48px;padding-top:14px}
+nav.toc{position:sticky;top:16px;align-self:start}nav.toc a{color:var(--ink3);text-decoration:none;display:block;padding:3px 8px;font-size:13px}
+nav.toc a:hover{color:var(--ink)}
+@media print{nav.toc,.no-print{display:none}.kpis{grid-template-columns:repeat(4,1fr)}}
+</style></head><body><main>
+<h1>Live Coach — arch1 / variant-10 / iter-1</h1>
+<p class="lede">scenario-A replayed line by line; the coach decided after every buyer line. Gold: 9 anchored moments (5 required fires).</p>
+<p class="meta"><span>model gemini-2.5-flash</span><span>standard gold-v3-dressler-11-linereplay</span>
+<span>run 2026-08-28T04:20:33</span><span>variant sha 5e6eaed1569c</span></p>
+<div class="kpis">
+<div class="kpi"><div class="n">5</div><div class="l">fires (gold catches)</div></div>
+<div class="kpi bad"><div class="n">2</div><div class="l">false fires</div></div>
+<div class="kpi"><div class="n">0</div><div class="l">missed required</div></div>
+<div class="kpi"><div class="n">949</div><div class="l">p50 ms</div></div>
+</div>
+<h2 id="transcript">Transcript — every decision in order</h2>
+<div class="moment" id="L2"><div class="mrow"><span class="t">L2</span><span class="who">Marcus</span><span class="said">Elena, thanks for making time. I know Q2 planning is eating everyone&#x27;s calendar right now.</span><span class="gold">gold HOLD L1</span></div></div><div class="moment" id="L4"><div class="mrow"><span class="t">L4</span><span class="who">Elena</span><span class="said">It is. Thanks for flexing to Friday. I&#x27;ll be honest, we took this call because onboarding new reps is becoming our bottleneck.</span><span class="gold">gold HOLD L1</span></div><div class="act"><span class="chip">HOLD</span> — buyer just opened with their main problem</div></div><div class="moment goldfire" id="L6"><div class="mrow"><span class="t">L6</span><span class="who">Marcus</span><span class="said">Got it. Quick framing first — PipeLens records every call, scores it, and builds the ramp playbook automatically. So before we dig in, tell me a little about your team and who else touches a decision like this?</span><span class="gold">gold FIRE L3</span></div></div><div class="moment goldfire" id="L8"><div class="mrow"><span class="t">L8</span><span class="who">Elena</span><span class="said">So we lost three reps last quarter — two quit inside four months, one we managed out — and the ones we hire are taking seven months to hit quota, our old number was four. When a ramp slips that far, the territory just—</span><span class="gold">gold FIRE L3</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Name the 7-month ramp</div><div class="fld"><b>WHY IT MATTERS</b> Lost three reps, quota hit slips</div><div class="fld"><b>NEXT BEST MOVE</b> Quantify the territory impact</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 4
+SIGNAL: Name the 7-month ramp
+WHY IT MATTERS: Lost three reps, quota hit slips
+NEXT BEST MOVE: Quantify the territory impact</pre></details></div><div class="moment goldfire" id="L10"><div class="mrow"><span class="t">L10</span><span class="who">Marcus</span><span class="said">Right, right, and that&#x27;s exactly what the auto-playbook fixes. It ingests every recorded call, tags the talk patterns of your top performers, and pushes a personalized ramp plan to each new hire. There&#x27;s also a manager dashboard with drill-downs, benchmark sliders, sentiment timelines, cohort heatmaps—</span><span class="gold">gold FIRE L3</span></div></div><div class="moment goldfire" id="L12"><div class="mrow"><span class="t">L12</span><span class="who">Elena</span><span class="said">Marcus — the feature list isn&#x27;t what I&#x27;m evaluating. I&#x27;ve watched two tools die in this team, and both died the same way: the reps never trusted what the tool said about them, so they gamed it or ignored it. If my reps don&#x27;t trust the score, PipeLens is dead in a week.</span><span class="gold">gold FIRE L3</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Name the trust objection</div><div class="fld"><b>WHY IT MATTERS</b> Reps gamed two prior tools to death</div><div class="fld"><b>NEXT BEST MOVE</b> Validate trust as a core KPI</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 4
+SIGNAL: Name the trust objection
+WHY IT MATTERS: Reps gamed two prior tools to death
+NEXT BEST MOVE: Validate trust as a core KPI</pre></details></div><div class="moment" id="L14"><div class="mrow"><span class="t">L14</span><span class="who">Marcus</span><span class="said">Totally, and the scoring is our crown jewel — forty-two signal types per call, sentiment drift detection, per-team calibration. The dashboard alone gives you things your managers have never seen.</span><span class="gold">gold HOLD L2</span></div></div><div class="moment" id="L16"><div class="mrow"><span class="t">L16</span><span class="who">Elena</span><span class="said">How does a rep even see their own score? Is it pushed to them or pulled by the manager?</span><span class="gold">gold HOLD L2</span></div><div class="act"><span class="chip">HOLD</span> — UX test or product-mechanics Q</div></div><div class="moment goldfire" id="L18"><div class="mrow"><span class="t">L18</span><span class="who">Marcus</span><span class="said">Both, actually — the manager sees it live in the dashboard, and reps get a weekly summary email with their trend line, percentile rank against the team, and clip links to their own calls.</span><span class="gold">gold FIRE L4</span></div></div><div class="moment goldfire" id="L20"><div class="mrow"><span class="t">L20</span><span class="who">Elena</span><span class="said">Okay. Look, I have to be straight about money — we froze new tool spend until Q3, and anything over forty thousand a year needs CFO sign-off. That&#x27;s not a negotiating pose, that&#x27;s just where we are.</span><span class="gold">gold FIRE L4</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Name the Q3 spend freeze</div><div class="fld"><b>WHY IT MATTERS</b> CFO sign-off over $40k until Q3</div><div class="fld"><b>NEXT BEST MOVE</b> Offer a Q3-aligned plan</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 4
+SIGNAL: Name the Q3 spend freeze
+WHY IT MATTERS: CFO sign-off over $40k until Q3
+NEXT BEST MOVE: Offer a Q3-aligned plan</pre></details></div><div class="moment goldfire" id="L22"><div class="mrow"><span class="t">L22</span><span class="who">Marcus</span><span class="said">Sure, sure, and that&#x27;s exactly why the platform pays for itself — the playbook module alone typically cuts ramp by a third. There&#x27;s also the analytics add-on your ops team would love, plus the CRM sync, which—</span><span class="gold">gold FIRE L4</span></div></div><div class="moment goldfire" id="L24"><div class="mrow"><span class="t">L24</span><span class="who">Elena</span><span class="said">Marcus. I heard the ROI case. I&#x27;m telling you the process: eleven hundred a seat puts us at forty-four, and if the number that lands on my CFO&#x27;s desk starts with a five, procurement resets the whole quarter.</span><span class="gold">gold FIRE L4</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Name the $44k budget ceiling</div><div class="fld"><b>WHY IT MATTERS</b> CFO resets procurement over $50k</div><div class="fld"><b>NEXT BEST MOVE</b> Anchor to $44k or less</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 4
+SIGNAL: Name the $44k budget ceiling
+WHY IT MATTERS: CFO resets procurement over $50k
+NEXT BEST MOVE: Anchor to $44k or less</pre></details></div><div class="moment" id="L26"><div class="mrow"><span class="t">L26</span><span class="who">Marcus</span><span class="said">Understood. So anyway, the benchmark sliders — you can set them by segment, by region, even by product line, which is huge for a team your size.</span><span class="gold">gold HOLD L2</span></div></div><div class="moment" id="L28"><div class="mrow"><span class="t">L28</span><span class="who">Elena</span><span class="said">Let&#x27;s try something else. If we did anything, it would be small — a pilot with one onboarding cohort. What would that even look like?</span><span class="gold">gold HOLD L2</span></div><div class="act"><span class="chip">HOLD</span> — buyer asks for a pilot, seller answers</div></div><div class="moment goldfire" id="L30"><div class="mrow"><span class="t">L30</span><span class="who">Marcus</span><span class="said">That I can do — five reps, their manager, run it against a control cohort and measure ramp weeks. Clean read.</span><span class="gold">gold FIRE L3</span></div></div><div class="moment goldfire" id="L32"><div class="mrow"><span class="t">L32</span><span class="who">Elena</span><span class="said">Alright. And full disclosure — my counterpart Jana runs the enterprise team in Rotterdam, sixty reps, same ramp problem but worse. If the pilot means anything, she&#x27;ll want to see it.</span><span class="gold">gold FIRE L3</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Name the Jana referral</div><div class="fld"><b>WHY IT MATTERS</b> Jana runs 60 reps in Rotterdam</div><div class="fld"><b>NEXT BEST MOVE</b> Offer to loop Jana in</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 3
+SIGNAL: Name the Jana referral
+WHY IT MATTERS: Jana runs 60 reps in Rotterdam
+NEXT BEST MOVE: Offer to loop Jana in</pre></details></div><div class="moment goldfire" id="L34"><div class="mrow"><span class="t">L34</span><span class="who">Marcus</span><span class="said">Oh, that&#x27;s awesome. The more the merrier, honestly.</span><span class="gold">gold FIRE L4</span></div></div><div class="moment goldfire" id="L36"><div class="mrow"><span class="t">L36</span><span class="who">Elena</span><span class="said">Sure. Okay — send me something after the holidays and we&#x27;ll pick it up.</span><span class="gold">gold FIRE L4</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Close with no date</div><div class="fld"><b>WHY IT MATTERS</b> No named day or calendar slot</div><div class="fld"><b>NEXT BEST MOVE</b> Lock a specific date</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 3
+SIGNAL: Close with no date
+WHY IT MATTERS: No named day or calendar slot
+NEXT BEST MOVE: Lock a specific date</pre></details></div><div class="moment" id="L38"><div class="mrow"><span class="t">L38</span><span class="who">Marcus</span><span class="said">Will do. I&#x27;ll send over the deck with the full feature rundown, and let&#x27;s definitely stay in touch.</span><span class="gold">gold HOLD L1</span></div></div><div class="moment mismatch" id="L40"><div class="mrow"><span class="t">L40</span><span class="who">Elena</span><span class="said">Sounds good, Marcus. Talk soon.</span><span class="gold">gold HOLD L1</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Close with no date</div><div class="fld"><b>WHY IT MATTERS</b> No named day or calendar slot</div><div class="fld"><b>NEXT BEST MOVE</b> Lock next meeting date</div></div><div class="mm">false fire — gold: Wind-down. The repair moment was A8; a card now would chase a closing buyer.</div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 3
+SIGNAL: Close with no date
+WHY IT MATTERS: No named day or calendar slot
+NEXT BEST MOVE: Lock next meeting date</pre></details></div><div class="moment" id="L42"><div class="mrow"><span class="t">L42</span><span class="who">Marcus</span><span class="said">You too, Elena. Have a great weekend.</span><span class="gold">gold HOLD L1</span></div></div><div class="moment mismatch" id="L44"><div class="mrow"><span class="t">L44</span><span class="who">Elena</span><span class="said">You too. Bye now.</span><span class="gold">gold HOLD L1</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Close with no date</div><div class="fld"><b>WHY IT MATTERS</b> No named day or calendar slot</div><div class="fld"><b>NEXT BEST MOVE</b> Lock a specific next meeting</div></div><div class="mm">false fire — gold: Wind-down. The repair moment was A8; a card now would chase a closing buyer.</div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 3
+SIGNAL: Close with no date
+WHY IT MATTERS: No named day or calendar slot
+NEXT BEST MOVE: Lock a specific next meeting</pre></details></div>
+<h2 id="facts">Facts</h2>
+<pre>{
+ &quot;counts&quot;: {
+  &quot;decision_points&quot;: 11,
+  &quot;fires&quot;: 5,
+  &quot;false_fires&quot;: 2,
+  &quot;missed_required&quot;: 0,
+  &quot;errors&quot;: 0,
+  &quot;holds_ok&quot;: 3
+ },
+ &quot;fire&quot;: {
+  &quot;caught_at&quot;: {
+   &quot;A2&quot;: 8,
+   &quot;A3&quot;: 12,
+   &quot;A5&quot;: 20,
+   &quot;A7&quot;: 32,
+   &quot;A8&quot;: 36
+  },
+  &quot;missed&quot;: [],
+  &quot;false_at_lines&quot;: [
+   40,
+   44
+  ]
+ },
+ &quot;optional&quot;: {
+  &quot;held&quot;: []
+ },
+ &quot;errors&quot;: [],
+ &quot;dlt&quot;: {
+  &quot;p50_ms&quot;: 949,
+  &quot;p95_ms&quot;: 5883,
+  &quot;max_ms&quot;: 5883
+ },
+ &quot;cost&quot;: {
+  &quot;tokens_in&quot;: 19274,
+  &quot;tokens_out&quot;: 380
+ }
+}</pre>
+<footer>REAL run — Gemini decisions via Gemini-direct key. Reproduce:
+<code>python3 -m core.run --variant 10 --iter 1 --scenario A</code> ·
+raw: /home/eder/Documentos/pitch-genius-tests/glm/runs/arch1/variant-10/scenario-a-iter-1/run.json</footer>
+</main></body></html>

@@ -1,0 +1,137 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>arch1 variant-12 iter-1 — scenario-C line replay</title>
+<style>
+:root{--paper:#fbfaf7;--ink:#1c1a17;--ink2:#5c5750;--ink3:#8a847a;--line:#e4e0d8;
+--accent:#b3541e;--red:#b3261e;--serif:'Fraunces',Georgia,'Iowan Old Style',serif;
+--sans:'Hanken Grotesk',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace}
+@media(prefers-color-scheme:dark){:root{--paper:#191713;--ink:#e9e5dc;--ink2:#a8a297;
+--ink3:#7a746a;--line:#2e2a24;--accent:#d97a44;--red:#e57368}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);
+font-family:var(--sans);font-size:16px;line-height:1.6}
+main{max-width:920px;margin:0 auto;padding:40px 20px 120px}
+h1{font-family:var(--serif);font-size:2.4rem;line-height:1.1;margin:0 0 .2em;letter-spacing:-.01em}
+.lede{color:var(--ink2);font-family:var(--serif);font-size:1.2rem;margin:0 0 12px}
+.meta{color:var(--ink3);font-size:12.5px;display:flex;gap:14px;flex-wrap:wrap;margin:0 0 28px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 34px}
+.kpi{border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+.kpi .n{font-family:var(--serif);font-size:1.9rem;font-variant-numeric:tabular-nums;font-weight:600}
+.kpi.bad .n{color:var(--red)}.kpi .l{color:var(--ink3);font-size:11px;text-transform:uppercase;letter-spacing:.07em;margin-top:3px}
+h2{font-family:var(--serif);font-size:1.45rem;margin:2.2em 0 .5em}
+.moment{border-left:2px solid transparent;padding:7px 0 7px 14px;margin:0 0 2px;border-radius:3px}
+.moment.mismatch{border-left-color:var(--red)}
+.moment.goldfire{border-left-color:var(--accent)}
+.mrow{display:flex;gap:12px;align-items:baseline}
+.t{font-family:var(--mono);font-size:11.5px;color:var(--ink3);min-width:52px}
+.who{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink2);min-width:64px}
+.said{font-family:var(--serif);font-size:16.5px}
+.gold{font-size:11px;color:var(--accent);font-family:var(--mono)}
+.act{margin:3px 0 0 78px;font-size:13.5px;color:var(--ink2)}
+.act.fire{color:var(--ink)}
+.chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;padding:1px 7px;border-radius:20px;border:1px solid var(--line)}
+.chip.f{background:var(--accent);color:#fff;border-color:var(--accent)}
+.card{margin:6px 0 8px 78px;border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+.fld{font-size:13.5px;margin:2px 0}.fld b{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink3);font-weight:600}
+.mm{margin:2px 0 0 78px;font-size:12.5px;color:var(--red)}
+details{margin:10px 0 0 78px}summary{cursor:pointer;font-size:12.5px;color:var(--ink3)}
+pre{background:color-mix(in srgb,var(--ink) 6%,transparent);padding:10px;border-radius:6px;
+font-size:11.5px;overflow-x:auto;font-family:var(--mono);white-space:pre-wrap}
+footer{color:var(--ink3);font-size:12px;border-top:1px solid var(--line);margin-top:48px;padding-top:14px}
+nav.toc{position:sticky;top:16px;align-self:start}nav.toc a{color:var(--ink3);text-decoration:none;display:block;padding:3px 8px;font-size:13px}
+nav.toc a:hover{color:var(--ink)}
+@media print{nav.toc,.no-print{display:none}.kpis{grid-template-columns:repeat(4,1fr)}}
+</style></head><body><main>
+<h1>Live Coach — arch1 / variant-12 / iter-1</h1>
+<p class="lede">scenario-C replayed line by line; the coach decided after every buyer line. Gold: 8 anchored moments (6 required fires).</p>
+<p class="meta"><span>model gemini-2.5-flash</span><span>standard gold-v3-dressler-11-linereplay</span>
+<span>run 2026-08-28T04:59:00</span><span>variant sha b7e63215e622</span></p>
+<div class="kpis">
+<div class="kpi"><div class="n">6</div><div class="l">fires (gold catches)</div></div>
+<div class="kpi bad"><div class="n">1</div><div class="l">false fires</div></div>
+<div class="kpi"><div class="n">0</div><div class="l">missed required</div></div>
+<div class="kpi"><div class="n">4598</div><div class="l">p50 ms</div></div>
+</div>
+<h2 id="transcript">Transcript — every decision in order</h2>
+<div class="moment goldfire" id="L2"><div class="mrow"><span class="t">L2</span><span class="who">Derek</span><span class="said">Tom, appreciate you circling back — I know it went quiet for a couple weeks there.</span><span class="gold">gold FIRE L4</span></div></div><div class="moment goldfire" id="L4"><div class="mrow"><span class="t">L4</span><span class="who">Tom</span><span class="said">It went quiet because my calendar collapsed. The board moved our Q2 growth plan up six weeks. Everything I buy this quarter gets bought in a hurry or not at all.</span><span class="gold">gold FIRE L4</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Board moved Q2 plan</div><div class="fld"><b>WHY IT MATTERS</b> Buy this quarter or not at all</div><div class="fld"><b>NEXT BEST MOVE</b> Confirm the new deadline</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 4
+SIGNAL: Board moved Q2 plan
+WHY IT MATTERS: Buy this quarter or not at all
+NEXT BEST MOVE: Confirm the new deadline</pre></details></div><div class="moment goldfire" id="L6"><div class="mrow"><span class="t">L6</span><span class="who">Derek</span><span class="said">Understood. So let me re-ground you in the proposal — you&#x27;ve got the platform fee, the analytics module, the playbook module, and I&#x27;d recommend adding the benchmarking tier this year.</span><span class="gold">gold FIRE L4</span></div></div><div class="moment goldfire" id="L8"><div class="mrow"><span class="t">L8</span><span class="who">Tom</span><span class="said">Derek. The modules are noise right now. Whatever we do has to be live by April fifteenth, wired into onboarding, or the Q2 plan runs without you.</span><span class="gold">gold FIRE L4</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> April 15th hard deadline</div><div class="fld"><b>WHY IT MATTERS</b> Q2 plan runs without you</div><div class="fld"><b>NEXT BEST MOVE</b> Confirm April 15th go-live</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 4
+SIGNAL: April 15th hard deadline
+WHY IT MATTERS: Q2 plan runs without you
+NEXT BEST MOVE: Confirm April 15th go-live</pre></details></div><div class="moment goldfire" id="L10"><div class="mrow"><span class="t">L10</span><span class="who">Derek</span><span class="said">No, we can do that. We can absolutely do that.</span><span class="gold">gold FIRE L3</span></div></div><div class="moment goldfire" id="L12"><div class="mrow"><span class="t">L12</span><span class="who">Tom</span><span class="said">Then here&#x27;s what I need before anything else. I want to talk to a CRO who&#x27;s run this with field reps like mine — industrial, older, skeptical. A slick SaaS logo tells me nothing.</span><span class="gold">gold FIRE L3</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Ask for CRO reference</div><div class="fld"><b>WHY IT MATTERS</b> Needs CRO with industrial reps</div><div class="fld"><b>NEXT BEST MOVE</b> Offer a relevant CRO reference</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 3
+SIGNAL: Ask for CRO reference
+WHY IT MATTERS: Needs CRO with industrial reps
+NEXT BEST MOVE: Offer a relevant CRO reference</pre></details></div><div class="moment goldfire" id="L14"><div class="mrow"><span class="t">L14</span><span class="who">Derek</span><span class="said">Sure — and while I set that up, it&#x27;s worth knowing the roadmap: Q3 brings the coaching copilot, the mobile rep view, and benchmarking gets a whole new engine.</span><span class="gold">gold FIRE L3</span></div></div><div class="moment mismatch" id="L16"><div class="mrow"><span class="t">L16</span><span class="who">Tom</span><span class="said">The roadmap&#x27;s fine. The reference is the thing.</span><span class="gold">gold FIRE L3</span></div><div class="act"><span class="chip">HOLD</span> — Cooldown, buyer repeating prior signal</div><div class="mm">missed fire — gold: The buyer named his proof requirement — a live CRO reference from a comparable shop, twice (L12, L16) — and go</div></div><div class="moment goldfire" id="L18"><div class="mrow"><span class="t">L18</span><span class="who">Derek</span><span class="said">I&#x27;ve got a case study PDF from a distribution company — I&#x27;ll email it today.</span><span class="gold">gold FIRE L3</span></div></div><div class="moment goldfire" id="L20"><div class="mrow"><span class="t">L20</span><span class="who">Tom</span><span class="said">Not a PDF. A person. Look, separately — Dana Reyes at Ironworks runs a team twice mine, and she asked me last month what I was doing about ramp. If this is real, she&#x27;ll want to know.</span><span class="gold">gold FIRE L3</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Dana Reyes intro</div><div class="fld"><b>WHY IT MATTERS</b> Dana runs team twice Tom&#x27;s size</div><div class="fld"><b>NEXT BEST MOVE</b> Ask for the intro</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 3
+SIGNAL: Dana Reyes intro
+WHY IT MATTERS: Dana runs team twice Tom&#x27;s size
+NEXT BEST MOVE: Ask for the intro</pre></details></div><div class="moment goldfire" id="L22"><div class="mrow"><span class="t">L22</span><span class="who">Derek</span><span class="said">Oh, she sounds like a great fit, we should definitely talk.</span><span class="gold">gold FIRE L4</span></div></div><div class="moment goldfire" id="L24"><div class="mrow"><span class="t">L24</span><span class="who">Tom</span><span class="said">Sure. Now the number. One-eighteen a year is steep for a first year with no proof. Take fifteen percent off and you have a deal today — I&#x27;ll sign this week.</span><span class="gold">gold FIRE L4</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Buyer wants 15% off</div><div class="fld"><b>WHY IT MATTERS</b> Deal today, sign this week</div><div class="fld"><b>NEXT BEST MOVE</b> Offer a discount</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 4
+SIGNAL: Buyer wants 15% off
+WHY IT MATTERS: Deal today, sign this week
+NEXT BEST MOVE: Offer a discount</pre></details></div><div class="moment goldfire" id="L26"><div class="mrow"><span class="t">L26</span><span class="who">Derek</span><span class="said">Done. Fifteen off.</span><span class="gold">gold FIRE L4</span></div></div><div class="moment goldfire" id="L28"><div class="mrow"><span class="t">L28</span><span class="who">Tom</span><span class="said">Good. And include the onboarding package in that — training, config, the whole thing.</span><span class="gold">gold FIRE L4</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Buyer wants onboarding</div><div class="fld"><b>WHY IT MATTERS</b> Training and config included</div><div class="fld"><b>NEXT BEST MOVE</b> Confirm onboarding details</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 3
+SIGNAL: Buyer wants onboarding
+WHY IT MATTERS: Training and config included
+NEXT BEST MOVE: Confirm onboarding details</pre></details></div><div class="moment goldfire" id="L30"><div class="mrow"><span class="t">L30</span><span class="who">Derek</span><span class="said">Absolutely. Consider it in.</span><span class="gold">gold FIRE L4</span></div></div><div class="moment goldfire" id="L32"><div class="mrow"><span class="t">L32</span><span class="who">Tom</span><span class="said">Alright. Send the revised order and I&#x27;ll sign this week. Onboarding needs to start well before April.</span><span class="gold">gold FIRE L4</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Buyer wants revised order</div><div class="fld"><b>WHY IT MATTERS</b> Sign this week, onboarding before April</div><div class="fld"><b>NEXT BEST MOVE</b> Lock the date for signing</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 4
+SIGNAL: Buyer wants revised order
+WHY IT MATTERS: Sign this week, onboarding before April
+NEXT BEST MOVE: Lock the date for signing</pre></details></div><div class="moment goldfire" id="L34"><div class="mrow"><span class="t">L34</span><span class="who">Derek</span><span class="said">You got it. I&#x27;ll get the paperwork over to you sometime this week and we&#x27;ll figure out kickoff once you&#x27;ve signed.</span><span class="gold">gold FIRE L4</span></div></div><div class="moment goldfire" id="L36"><div class="mrow"><span class="t">L36</span><span class="who">Tom</span><span class="said">Don&#x27;t figure it out after. If onboarding slips past mid-March, April fifteenth slips, and then the whole thing&#x27;s off.</span><span class="gold">gold FIRE L4</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Onboarding slips past mid-March</div><div class="fld"><b>WHY IT MATTERS</b> April 15th slips, whole deal off</div><div class="fld"><b>NEXT BEST MOVE</b> Lock mid-March onboarding</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 4
+SIGNAL: Onboarding slips past mid-March
+WHY IT MATTERS: April 15th slips, whole deal off
+NEXT BEST MOVE: Lock mid-March onboarding</pre></details></div><div class="moment goldfire" id="L38"><div class="mrow"><span class="t">L38</span><span class="who">Derek</span><span class="said">We&#x27;ll make it work, Tom. We&#x27;ll make it work.</span><span class="gold">gold FIRE L3</span></div></div><div class="moment goldfire" id="L40"><div class="mrow"><span class="t">L40</span><span class="who">Tom</span><span class="said">Make it work with dates. And since Dana keeps asking — loop me in when you talk to her, she hates cold outreach.</span><span class="gold">gold FIRE L3</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Dana Reyes intro</div><div class="fld"><b>WHY IT MATTERS</b> Dana hates cold outreach</div><div class="fld"><b>NEXT BEST MOVE</b> Ask for the intro route</div></div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 3
+SIGNAL: Dana Reyes intro
+WHY IT MATTERS: Dana hates cold outreach
+NEXT BEST MOVE: Ask for the intro route</pre></details></div><div class="moment" id="L42"><div class="mrow"><span class="t">L42</span><span class="who">Derek</span><span class="said">For sure, for sure.</span><span class="gold">gold HOLD L1</span></div></div><div class="moment mismatch" id="L44"><div class="mrow"><span class="t">L44</span><span class="who">Tom</span><span class="said">Good. Send the paper.</span><span class="gold">gold HOLD L1</span></div><div class="act fire"><span class="chip f">FIRE</span></div><div class="card"><div class="fld"><b>SIGNAL</b> Buyer wants paper</div><div class="fld"><b>WHY IT MATTERS</b> Sign this week, onboarding before April</div><div class="fld"><b>NEXT BEST MOVE</b> Lock date for signing</div></div><div class="mm">false fire — gold: Buyer closing. The open repairs (C6 dates, C7 intro) are already carded; repeating them at goodbye is piling o</div><details class="no-print"><summary>raw output</summary><pre>FIRE
+LEVEL: 3
+SIGNAL: Buyer wants paper
+WHY IT MATTERS: Sign this week, onboarding before April
+NEXT BEST MOVE: Lock date for signing</pre></details></div>
+<h2 id="facts">Facts</h2>
+<pre>{
+ &quot;counts&quot;: {
+  &quot;decision_points&quot;: 11,
+  &quot;fires&quot;: 6,
+  &quot;false_fires&quot;: 1,
+  &quot;missed_required&quot;: 0,
+  &quot;errors&quot;: 0,
+  &quot;holds_ok&quot;: 1
+ },
+ &quot;fire&quot;: {
+  &quot;caught_at&quot;: {
+   &quot;C2&quot;: 4,
+   &quot;C3&quot;: 12,
+   &quot;C4&quot;: 20,
+   &quot;C5&quot;: 24,
+   &quot;C6&quot;: 32,
+   &quot;C7&quot;: 40
+  },
+  &quot;missed&quot;: [],
+  &quot;false_at_lines&quot;: [
+   44
+  ]
+ },
+ &quot;optional&quot;: {
+  &quot;held&quot;: []
+ },
+ &quot;errors&quot;: [],
+ &quot;dlt&quot;: {
+  &quot;p50_ms&quot;: 4598,
+  &quot;p95_ms&quot;: 26611,
+  &quot;max_ms&quot;: 26611
+ },
+ &quot;cost&quot;: {
+  &quot;tokens_in&quot;: 21636,
+  &quot;tokens_out&quot;: 371
+ }
+}</pre>
+<footer>REAL run — Gemini decisions via Gemini-direct key. Reproduce:
+<code>python3 -m core.run --variant 12 --iter 1 --scenario C</code> ·
+raw: /home/eder/Documentos/pitch-genius-tests/glm/runs/arch1/variant-12/scenario-c-iter-1/run.json</footer>
+</main></body></html>
